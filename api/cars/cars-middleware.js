@@ -4,8 +4,9 @@ const checkCarId = async (req, res, next) => {
   // DO YOUR MAGIC
   const valid = await Car.getById(req.params.id)
   if(!valid) {
-    next(res.status(404).json({ "message": "car with id" + req.params.id + "is not found"}))
+    next(res.status(404).json({ "message": "car with id " + req.params.id + " is not found"}))
   } else {
+
     next()
   }
 }
@@ -28,7 +29,7 @@ const checkCarPayload = (req, res, next) => {
 
 const checkVinNumberValid = (req, res, next) => {
   // DO YOUR MAGIC
-  
+
 }
 
 const checkVinNumberUnique = (req, res, next) => {

@@ -4,26 +4,33 @@ const router = express.Router();
 const Car = require('./cars-model')
 const { checkCarId, checkCarPayload, checkVinNumberUnique, checkVinNumberValid} = require('./cars-middleware')
 
-router.get('/', (res, req, next) => {
+router.get('/', async (req, res, next) => {
     Car.getAll()
     .then(car => {
-     res.status(200).json(car)   
+     res.json(car)   
     })
     .catch(next)
 })
 
-router.get('/:id', (res, req, next) => {
-    
+router.get('/:id', checkCarId, async (req, res, next) => {
+    try {
+        const car = await Car.getById(req.params.id);
+        res.status(200).json(car)
+    }
+    catch (err) {
+        next(err)
+    }
 })
 
-router.post('/', (res, req, next) => {
+router.post('/', (req, res, next) => {
     
 })
 
 router.use((err, req, res, next) => { // eslint-disable-line
     // DO YOUR MAGIC
     res.status(err.status || 500).json({
-      message: err.message
+      message: err.message,
+      stack: err.stack
     })
   })
 
