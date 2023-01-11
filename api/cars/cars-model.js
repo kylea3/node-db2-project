@@ -21,7 +21,9 @@ const create = async car => {
   // DO YOUR MAGIC
   await db('cars')
   .insert(car)
-  return car
+  return db('cars')
+  .orderBy('id', 'desc')
+  .first()
 }
 
 module.exports = {

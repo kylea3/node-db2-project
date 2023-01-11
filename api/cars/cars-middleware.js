@@ -16,13 +16,13 @@ const checkCarPayload = (req, res, next) => {
   // shrink to single line of code using filter
   const { vin, make, model, mileage } = req.body;
   if (!vin) {
-    next(res.status(400).json({ "message": vin + "is not found" }))
+    next(res.status(400).json({ "message": "vin is missing" }))
   } else if (!make) {
-    next(res.status(400).json({ "message": make + "is not found" }))
+    next(res.status(400).json({ "message": "make is missing" }))
   } else if (!model) {
-    next(res.status(400).json({ "message":model + "is not found" }))
+    next(res.status(400).json({ "message": "model is missing" }))
   } else if (!mileage) {
-    next(res.status(400).json({ "message": mileage + "is not found" }))
+    next(res.status(400).json({ "message": "mileage is missing" }))
   } else {
     next()
   }
