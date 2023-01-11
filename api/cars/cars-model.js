@@ -11,12 +11,22 @@ const getById = id => {
   .first()
 }
 
-const create = () => {
+const checkUniqueVin = vin => {
+  return db('cars')
+  .where('vin', vin)
+  .first()
+}
+
+const create = async car => {
   // DO YOUR MAGIC
+  await db('cars')
+  .insert(car)
+  return car
 }
 
 module.exports = {
   getAll,
+  checkUniqueVin,
   getById,
   create
 }
